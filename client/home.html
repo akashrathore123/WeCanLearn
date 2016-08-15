@@ -9,7 +9,7 @@
    <meta charset="utf-8">
 	<title>WeCanLearn</title>
 	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="author" content="Akash Rathore">
 
    <!-- mobile specific metas
    ================================================== -->
@@ -17,9 +17,11 @@
 
  	<!-- CSS
    ================================================== -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
    <link rel="stylesheet" href="css/base.css">
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/vendor.css">
+   <link rel="stylesheet" href="css/contact.css">
 
    <!-- script
    ================================================== -->
@@ -40,7 +42,7 @@
    	<div class="row">
 
    		<div class="logo">
-	         <a href="home.html">Lhander</a>
+	         <a href="home.html">WeCanLearn</a>
 	      </div>
 
 	   	<nav id="main-nav-wrap">
@@ -49,7 +51,7 @@
 					<li><a class="smoothscroll"  href="#process" title="">About Us</a></li>
 					<li><a class="smoothscroll"  href="#testimonials" title="">Testimonials</a></li>
 					<li><a class="smoothscroll"  href="#faq" title="">Demo</a></li>
-          <li><a class="smoothscroll"  href="#features" title="">Contact Us</a></li>
+          <li><a class="smoothscroll"  href="#features" title="">Features</a></li>
 					<li class="highlight with-sep"><a href="#" title="">Log In</a></li>
 				</ul>
 			</nav>
@@ -229,72 +231,47 @@
    ================================================== -->
    <section id="faq">
 
-   	<div class="row section-intro">
-   		<div class="col-twelve with-bottom-line">
+     <div class="inner contact">
+                     <!-- Form Area -->
+                     <div class="contact-form">
+                         <!-- Form -->
+                         <form id="contact-us" method="post" action="#">
+                             <!-- Left Inputs -->
+                             <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
+                                 <!-- Name -->
+                                 <input type="text" name="name" id="name" required="required" class="form" placeholder="Name" />
+                                 <!-- Email -->
+                                 <input type="email" name="mail" id="mail" required="required" class="form" placeholder="Email" />
+                                 <!-- Subject -->
+                                 <input type="text" name="phone" id="subject" required="required" class="form" placeholder="Mobile" />
+                             </div><!-- End Left Inputs -->
+                             <!-- Right Inputs -->
+                             <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
+                                 <!-- Message -->
+                                 <textarea name="message" id="message" class="form textarea"  placeholder="Message"></textarea>
+                             </div><!-- End Right Inputs -->
+                             <!-- Bottom Submit -->
+                             <div class="relative fullwidth col-xs-12">
+                                 <!-- Send Button -->
+                                 <button type="submit" id="submit" name="submit" class="form-btn semibold">Send Message</button>
+                             </div><!-- End Bottom Submit -->
+                             <!-- Clear -->
+                             <div class="clear"></div>
+                         </form>
 
-   			<h5>Faq</h5>
-   			<h1>Questions and Answers.</h1>
+                         <!-- Your Mail Message -->
+                         <div class="mail-message-area">
+                             <!-- Message -->
+                             <div class="alert gray-bg mail-message not-visible-message">
+                                 <strong>Thank You !</strong> Your email has been delivered.
+                             </div>
+                         </div>
 
-   			<p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p>
+                     </div><!-- End Contact Form Area -->
+                 </div><!-- End Inner -->
 
-   		</div>
-   	</div>
 
-   	<div class="row faq-content">
-
-   		<div class="q-and-a block-1-2 block-tab-full group">
-
-   			<div class="bgrid">
-
-   				<h3>What are the security features?</h3>
-
-   				<p>Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit adipisicing cupidatat.</p>
-
-   			</div>
-
-   			<div class="bgrid">
-
-   				<h3>How can I update my user profile?</h3>
-
-   				<p>Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit adipisicing cupidatat.</p>
-
-   			</div>
-
-   			<div class="bgrid">
-
-   				<h3>What features are not included in the free version?</h3>
-
-   				<p>Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit adipisicing cupidatat.</p>
-
-   			</div>
-
-   			<div class="bgrid">
-
-   				<h3>Can I upgrade my account from Starter to Premium?</h3>
-
-   				<p>Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit adipisicing cupidatat.</p>
-
-   			</div>
-
-   			<div class="bgrid">
-
-   				<h3>Where can I found all my uploads?</h3>
-
-   				<p>Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit adipisicing cupidatat.</p>
-
-   			</div>
-
-   			<div class="bgrid">
-
-   				<h3>How long can I use the free trial version?</h3>
-
-   				<p>Lorem ipsum Id in magna ad culpa dolor eu aute non amet aute ea in consectetur in quis nostrud anim proident dolore in sed et mollit voluptate culpa irure consequat laborum ea sint in mollit adipisicing cupidatat.</p>
-
-   			</div>
-
-   		</div> <!-- /q-and-a -->
-
-   	</div> <!-- /faq-content -->
+     <center> Visit Developer's Website <a href="http://shuvohabib.com" target="blank">Shuvo Habib </a> </center>
 
    	<div class="row section-ads">
 
