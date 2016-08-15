@@ -1,0 +1,19 @@
+var refresh = require('google-refresh-token');
+
+
+var mailConfig = {
+    email:"contact@daybox.in",
+    refreshToken: "1/W3dBpWL6xRUMJAZYOlwpHDgazVDVt6n7OwPCDyMcQ4k",
+    clientid: "1028195592684-844crjcl7bv0hp6qsb8kdf68kl6psu24.apps.googleusercontent.com",
+    clientSecret: "ud8EPGa3pBKHcpxZmccs64kH"
+}
+module.exports = {
+    getCredentials : function(cb){
+        refresh(mailConfig.refreshToken, mailConfig.clientid, mailConfig.clientSecret, function (err, json, res) {
+            if(!err){
+                mailConfig.accessToken = json.accessToken;
+                cb(mailConfig)
+            }
+        });
+    }
+}
