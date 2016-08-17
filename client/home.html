@@ -21,11 +21,12 @@
    <link rel="stylesheet" href="css/base.css">
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/vendor.css">
-   <link rel="stylesheet" href="css/contact.css">
 
    <!-- script
    ================================================== -->
 	<script src="js/modernizr.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="angular/home.js"></script>
 
    <!-- favicons
 	================================================== -->
@@ -33,7 +34,7 @@
 
 </head>
 
-<body id="top">
+<body id="top" ng-app="home">
 
 	<!-- header
    ================================================== -->
@@ -230,48 +231,53 @@
    <!-- faq
    ================================================== -->
    <section id="faq">
+     <div class="row section-intro">
+       <div class="col-twelve with-bottom-line">
 
-     <div class="inner contact">
+     <h1>Book A Demo</h1>
+   </div>
+  </div>
+
+     <div class="inner contact" ng-controller="demoForm">
                      <!-- Form Area -->
-                     <div class="contact-form">
+                     <div class="form-group">
                          <!-- Form -->
-                         <form id="contact-us" method="post" action="#">
+
                              <!-- Left Inputs -->
                              <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
                                  <!-- Name -->
-                                 <input type="text" name="name" id="name" required="required" class="form" placeholder="Name" />
+                                 <input type="text" name="name" ng-model="user.name" id="name" required="required" class="form-control" placeholder="Name" />
                                  <!-- Email -->
-                                 <input type="email" name="mail" id="mail" required="required" class="form" placeholder="Email" />
+                                 <input type="email" name="mail" ng-model="user.email" id="mail" required="required" class="form-control" placeholder="Email" />
                                  <!-- Subject -->
-                                 <input type="text" name="phone" id="subject" required="required" class="form" placeholder="Mobile" />
+                                 <input type="text" name="phone" ng-model="user.phone" id="subject" required="required" class="form-control" placeholder="Mobile" />
                              </div><!-- End Left Inputs -->
                              <!-- Right Inputs -->
                              <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
                                  <!-- Message -->
-                                 <textarea name="message" id="message" class="form textarea"  placeholder="Message"></textarea>
+                                 <textarea name="message" id="message" ng-model="user.message" class="form-control"  placeholder="Message"></textarea>
                              </div><!-- End Right Inputs -->
                              <!-- Bottom Submit -->
                              <div class="relative fullwidth col-xs-12">
                                  <!-- Send Button -->
-                                 <button type="submit" id="submit" name="submit" class="form-btn semibold">Send Message</button>
+                                 <center>
+                                 <button id="submit" name="submit" ng-click="bookDemo()" class="btn btn-info" style="margin-bottom:10px;">Send Message</button>
+                                   </center>
                              </div><!-- End Bottom Submit -->
                              <!-- Clear -->
                              <div class="clear"></div>
-                         </form>
 
                          <!-- Your Mail Message -->
-                         <div class="mail-message-area">
+
                              <!-- Message -->
-                             <div class="alert gray-bg mail-message not-visible-message">
-                                 <strong>Thank You !</strong> Your email has been delivered.
-                             </div>
-                         </div>
+
+                         <center>  <span id="demoResponse"></span></center>
+
 
                      </div><!-- End Contact Form Area -->
                  </div><!-- End Inner -->
 
 
-     <center> Visit Developer's Website <a href="http://shuvohabib.com" target="blank">Shuvo Habib </a> </center>
 
    	<div class="row section-ads">
 
@@ -279,12 +285,9 @@
 
 		     	<div class="ad-content">
 
-		     		<h2 class="h01"><a href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT">Styleshout Recommends Dreamhost.</a></h2>
-
 			      <p class="lead">
-			      Looking for an awesome and reliable webhosting? Try <a href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT"><span>DreamHost</span></a>.
-					Get <span>$50 off</span> when you sign up with the promocode <span>styleshout</span>.
-					<!-- Simply type	the promocode in the box labeled “Promo Code” when placing your order. -->
+
+					Book a demo for free and WeCanLearn will be at your service soon.
 					</p>
 
 					<div class="action">
@@ -296,7 +299,6 @@
 			</div>
 
 		</div> <!-- /section-ads -->
-
 
    </section> <!-- /faq -->
 

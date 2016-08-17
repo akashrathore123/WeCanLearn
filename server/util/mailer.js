@@ -34,7 +34,7 @@ module.exports = {
     send: function(to, subject, body, files){
       console.log("sending");
         var mailData = {
-            from: 'WeCanLearn <contact@wecanlearn.in>',
+            from: 'WeCanLearn <help@wecanlearn.in>',
             to: to,
             subject: subject,
             html: body,

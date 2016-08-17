@@ -87,12 +87,36 @@ School.registerSchool = function(data,cb){
  }
 
  });
-};
+}
 
 School.activateAccount = function(tokenID,cb){
 console.log("cg"+tokenID);
 
 }
+
+School.bookDemo = function(data,cb){
+  if(!data.name || !data.phone || !data.email || !data.message){
+        cb(util.getGenericError("Error",422,"Incomplete Data."))
+        return;
+    }
+    else{
+       var message = {text:""}
+       var renderer = loopback.template(path.resolve(__dirname, '../util/templates/demoConfirmation.ejs'));
+       var html_body = renderer(message);
+       mail.send(data.email,"Demo Confirmation | WeCanLearn",html_body);
+
+       var message = {name:" "+data.name,email:" "+data.email,phone:" "+data.phone,message:" "+data.message};
+       var renderer = loopback.template(path.resolve(__dirname, '../util/templates/demoReminder.ejs'));
+       var html_body = renderer(message);
+       mail.send("help@wecanlearn.in","Demo Reminder | WeCanLearn",html_body);
+       console.log("sent");
+       cb(null,"Demo Booked Successfully!");
+       return;
+    }
+  }
+
+
+
 
 School.remoteMethod('registerSchool',{
 
@@ -112,5 +136,13 @@ School.remoteMethod('activateAccount',{
 
 });
 
+School.remoteMethod('bookDemo',{
 
+  description:"Book a demo for school",
+  http: {path: '/bookDemo', verb: 'post'},
+  accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+  returns: {
+      type: 'string'
+    }
+});
 };
