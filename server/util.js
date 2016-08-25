@@ -7,4 +7,5 @@ var error = new Error();
 error.status = code;
 error.message = message;
   return error;
-  }}
+  }
+}

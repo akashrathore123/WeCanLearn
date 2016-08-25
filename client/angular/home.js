@@ -5,7 +5,7 @@ app.controller('demoForm',function($scope,$http,$window){
 
   $scope.bookDemo = function(){
     var demo =JSON.stringify($scope.user);
-
+console.log(demo);
 
     $http({
 

@@ -95,11 +95,27 @@ console.log("cg"+tokenID);
 }
 
 School.bookDemo = function(data,cb){
-  if(!data.name || !data.phone || !data.email || !data.message){
+  if(!data.name || !data.phone || !data.email){
+    console.log(data);
         cb(util.getGenericError("Error",422,"Incomplete Data."))
         return;
     }
-    else{
+
+    if(!validate.isName(data.name)){
+         cb(util.getGenericError("Error",400,"Invalid  Name."));
+         return;
+    }
+
+   if(!validate.isEmail(data.email)){
+          cb(util.getGenericError("Error",400,"Invalid email."));
+          return;
+    }
+   if(!validate.isPhone(data.phone)){
+          cb(util.getGenericError("Error",400,"Invalid Phone."));
+          return;
+    }else {
+
+
        var message = {text:""}
        var renderer = loopback.template(path.resolve(__dirname, '../util/templates/demoConfirmation.ejs'));
        var html_body = renderer(message);
