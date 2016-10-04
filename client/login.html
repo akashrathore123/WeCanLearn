@@ -32,7 +32,7 @@
           <div class="top-row">
             <div class="field-wrap">
               <label>
-               Name<span class="req">*</span>
+               School Name<span class="req">*</span>
               </label>
               <input type="text" ng-model="register.name" required autocomplete="off" />
             </div>
@@ -41,7 +41,7 @@
               <label>
                 Mobile<span class="req">*</span>
               </label>
-              <input type="number" ng-model="register.phone" required autocomplete="off"/>
+              <input type="text" ng-model="register.phone" required autocomplete="off"/>
             </div>
           </div>
 
@@ -57,6 +57,13 @@
                Address<span class="req">*</span>
             </label>
             <input type="text" ng-model="register.address" required autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+               City<span class="req">*</span>
+            </label>
+            <input type="text" ng-model="register.city" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">
@@ -79,9 +86,9 @@
 
             <div class="field-wrap">
             <label>
-              Email Address<span class="req">*</span>
+              Email or User Id<span class="req">*</span>
             </label>
-            <input type="email" ng-model="login.email" required autocomplete="off"/>
+            <input type="text" ng-model="login.email" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">

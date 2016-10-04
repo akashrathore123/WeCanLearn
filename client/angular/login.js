@@ -16,7 +16,7 @@ app.controller('registerAction',function($scope,$http,$window){
            }).
            success(function(data,status,headers,config){
                 document.getElementById("registerSubmit").disabled = "true";
-                document.getElementById("registerResponse").innerHTML = "<strong>Thank You !</strong> Email has been sent to verify. ";
+                document.getElementById("registerResponse").innerHTML = "<strong>Thank You !</strong> Email has been sent to verify account. ";
 
                 return;
 
@@ -46,14 +46,12 @@ app.controller('loginAction',function($scope,$http,$window){
                data : school
            }).
            success(function(data,status,headers,config){
-                document.getElementById("loginSubmit").disabled = "true";
-                document.getElementById("loginResponse").innerHTML = "<strong>Thank You !</strong> Email has been sent to verify. ";
+             document.getElementById("loginResponse").innerHTML = data;
 
                 return;
 
            })
       .error(function(data,status,headers,config){
-
 
         document.getElementById("loginResponse").innerHTML = "<span style='color:red'>"+data.error.message;
         return;

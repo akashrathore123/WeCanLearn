@@ -5,12 +5,16 @@ var uuid = require("node-uuid");
 var constant = require("../util/constants");
 var path = require('path');
 var loopback = require('loopback');
+var http = require('http');
 
 module.exports = function(School) {
 
+
+  /* --------- School registration method ------------*/
+
 School.registerSchool = function(data,cb){
 
-  console.log(data);
+
   if(!data.name || !data.address || !data.city || !data.password || !data.phone || !data.email){
 
     cb(util.getGenericError("Error",422,"Invalid data received."));
@@ -23,7 +27,7 @@ School.registerSchool = function(data,cb){
    }
 
    if(!validate.isName(data.city)){
-        cb(util.getGenericError("Error",400,"Invalid School Name."));
+        cb(util.getGenericError("Error",400,"Invalid city."));
         return;
    }
 
@@ -44,15 +48,32 @@ School.registerSchool = function(data,cb){
        return;
         }
      if(schoolInstance){
-        cb(util.getGenericError("Error",400,"Bad Request-Email already exist"));
+        cb(util.getGenericError("Error",400,"Email already exist"));
         return;
         }
-     else{
 
- var uuid5 = uuid.v4();
- var currentTime = new Date();
- var registerData = {
-                      "user_id": data.user_id,
+
+});
+
+      var userid = data.email.split('@');
+      userid = userid[0];
+      var uuid5 = uuid.v4();
+      var currentTime = new Date();
+
+  School.findOne({where:{user_id:userid+'@wecanlearn.in'}},function(err,schoolInstance){
+
+            if(err){
+              console.log(err);
+              cb(util.getInternalServerError("Error",500,"Internal Server Error"));
+              return;
+               }
+            if(schoolInstance){
+              userid = userid+uuid5.charAt(0);
+
+            }
+
+   var registerData = {
+                      "user_id": userid+'@wecanlearn.in',
                       "email_id": data.email,
                       "password": data.password,
                       "name": data.name,
@@ -70,11 +91,11 @@ School.registerSchool = function(data,cb){
 
     var renderer = loopback.template(path.resolve(__dirname, '../util/templates/activation.ejs'));
     html_body = renderer(myMessage);
-    console.log(html_body);
+  //  console.log(html_body);
     School.create(registerData,function(err){
                if(err){
                             console.log(err);
-                            cb(util.getGenericError("Error",500, "Registration could not complete."));
+                            cb(util.getGenericError("Error",500,"Registration could not complete."));
                             return;
                         }
                else{
@@ -84,15 +105,44 @@ School.registerSchool = function(data,cb){
                            return;
                       }
           });
- }
-
- });
-}
-
-School.activateAccount = function(tokenID,cb){
-console.log("cg"+tokenID);
+});
 
 }
+
+
+/* --------- Account activation method ------------*/
+
+School.activateAccount = function(tokenId,req,resp,cb){
+console.log("hello");
+School.findOne({where:{tokenID:tokenId}},function(err,schoolInstance){
+  if(err){
+    console.log(err);
+    cb(util.getGenericError("Error",500,"Internal Server Error."));
+    return;
+  }
+  if(schoolInstance){
+    schoolInstance.updateAttribute("verified","Yes",function(err,schoolActivated){
+      if(err){
+        cb(util.getGenericError("Error",500,"Internal Server Error."));
+        return;
+      }else{
+      //  var app = loopback();
+
+      resp.statusCode = 302;
+      resp.setHeader("Location", "../../../www.wecanlearn.in");
+      resp.end();
+
+        // cb(null,resp);
+
+    }
+
+    });
+  }
+});
+}
+
+
+/* --------- Demo booking method ------------*/
 
 School.bookDemo = function(data,cb){
   if(!data.name || !data.phone || !data.email){
@@ -132,7 +182,39 @@ School.bookDemo = function(data,cb){
   }
 
 
+  /* --------- School login method ------------*/
 
+School.loginSchool = function(data,cb){
+  if(!data.email || !data.password){
+    cb(util.getGenericError('Error',422,'Incomplete Data.'));
+    return;
+  }
+
+  if(!validate.isEmail(data.email)){
+    cb(util.getGenericError('Error',400,'Invalid Email.'));
+    return;
+  }
+
+  School.findOne({where:{or:[{and:[{user_id:data.email,password:data.password}]},{and:[{email_id:data.email,password:data.password}]}]}},function(err,schoolInstance){
+  console.log("Not Found");
+    if(err){
+      cb(util.getGenericError('Error',500,'Internal Server Error!'));
+      return;
+    }
+
+    if(schoolInstance){
+      cb(null,schoolInstance);
+    }else {
+      cb(util.getGenericError('Error',422,'Invalid email or password!'));
+      return;
+    }
+  });
+}
+
+
+
+
+/* --------- Remote method registration ------------*/
 
 School.remoteMethod('registerSchool',{
 
@@ -148,8 +230,10 @@ School.remoteMethod('activateAccount',{
 
   description:"Activate registered school account ",
   http: {path: '/activateAccount', verb: 'get'},
-  accepts: {arg: 'tokenID', type: 'string', http: { source: 'query' } },
-
+  accepts: [{arg: 'tokenID', type: 'string', http: { source: 'query' } },
+            {arg: 'req', type: 'object', http: { source: 'req' } },
+            {arg: 'resp', type: 'object', http: { source: 'res' } }],
+   returns: {arg:'resp',type:'object', http: { source: 'res'}},
 });
 
 School.remoteMethod('bookDemo',{
@@ -161,4 +245,14 @@ School.remoteMethod('bookDemo',{
       type: 'string'
     }
 });
+
+School.remoteMethod('loginSchool',{
+
+  description:"School login ",
+  http: {path: '/loginSchool', verb: 'post'},
+  accepts: {arg: 'data', type: 'object', http: { source: 'body' } },
+  returns: {type: 'object', root:true}
+
+});
+
 };

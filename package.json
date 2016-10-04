@@ -8,6 +8,7 @@
     "posttest": "nsp check"
   },
   "dependencies": {
+    "azure": "^1.1.1-preview",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "error": "^7.0.2",
