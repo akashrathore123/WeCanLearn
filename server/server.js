@@ -16,6 +16,11 @@ app.start = function() {
   });
 };
 
+var host = process.env.VCAP_APP_HOST || 'localhost';
+ var port = process.env.VCAP_APP_PORT || 3000;
+ app.set('host', host);
+ app.set('port', port);
+
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname, function(err) {

@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: WeCanLearn
+  host: WeCanLearn
+  disk_quota: 1024M
+  services:
+  - performance-monitoring-auto
+  - Compose for MongoDB-r4
